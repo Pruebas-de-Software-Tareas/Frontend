@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { LoginPage } from "./pages/LoginPage";
 import { RegisterPage } from "./pages/RegisterPage";
+import EventPage from './pages/EventPage';
 
 import './index.css';
 import { ProtectedRoute } from './components/ProtectedRoute';
@@ -17,7 +18,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-         <Route element={<ProtectedRoute />}>
+          <Route path="/eventos" element={<EventPage />} />
+          <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<DashboardPage />} />
           </Route>
         </Routes>
