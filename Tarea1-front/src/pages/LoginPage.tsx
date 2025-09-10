@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../api/auth';
 import { useAuth } from '../context/AuthContext';
+import { Eye, EyeOff } from 'lucide-react';
+
 
 export const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false); 
   const [error, setError] = useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -25,8 +28,6 @@ export const LoginPage = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="relative flex flex-col m-6 space-y-8 bg-white shadow-2xl rounded-2xl md:flex-row md:space-y-0">
-     
-     
         <div className="flex flex-col justify-center p-8 md:p-14">
           <span className="mb-3 text-4xl font-bold">Bienvenido de vuelta</span>
           <span className="font-light text-gray-400 mb-8">
@@ -44,19 +45,38 @@ export const LoginPage = () => {
                 required
               />
             </div>
-            <div className="py-4">
-              <span className="mb-2 text-md">Contraseña</span>
-              <input
-                type="password"
-                name="password"
-                className="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-             {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-            <button type="submit" className="w-full bg-black text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300">
+
+          <div className="py-4">
+  <span className="mb-2 text-md block">Contraseña</span>
+  <div className="relative flex items-center">
+    <input
+      type={showPassword ? 'text' : 'password'}
+      name="password"
+      className="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500 pr-10"
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+      required
+    />
+    <button
+      type="button"
+      className="absolute right-2"
+      onClick={() => setShowPassword(!showPassword)}
+    >
+      {showPassword ? (
+        <EyeOff className="h-5 w-5 text-gray-500" />
+      ) : (
+        <Eye className="h-5 w-5 text-gray-500" />
+      )}
+    </button>
+  </div>
+</div>
+
+
+            {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+            <button
+              type="submit"
+              className="w-full bg-black text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300"
+            >
               Iniciar sesión
             </button>
           </form>
@@ -65,16 +85,13 @@ export const LoginPage = () => {
             <Link to="/register" className="font-bold text-black ml-1">Regístrate</Link>
           </div>
         </div>
-  
-
-
 
         <div className="relative">
-            <img
-              src="https://img.freepik.com/free-vector/login-concept-illustration_114360-739.jpg?w=826"
-              alt="img"
-              className="w-[400px] h-full hidden rounded-r-2xl md:block object-cover"
-            />
+          <img
+            src="https://img.freepik.com/free-vector/login-concept-illustration_114360-739.jpg?w=826"
+            alt="img"
+            className="w-[400px] h-full hidden rounded-r-2xl md:block object-cover"
+          />
         </div>
       </div>
     </div>
