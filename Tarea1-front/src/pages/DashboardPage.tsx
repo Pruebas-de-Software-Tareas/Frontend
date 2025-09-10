@@ -1,5 +1,5 @@
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -59,6 +59,12 @@ export const DashboardPage = () => {
           </ul>
         </div>
       )}
+
+      <Link to="/eventos">
+        <button className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 mb-4">
+          Gestionar Eventos
+        </button>
+      </Link>
 
       <button 
         onClick={handleLogout}
